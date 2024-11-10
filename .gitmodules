@@ -7,8 +7,8 @@
 [submodule "ext/json"]
 	path = ext/json
 	url = https://github.com/nlohmann/json.git
-[submodule "ext/antlr4-src"]
-	path = ext/antlr4-src
+[submodule "ext/antlr4"]
+	path = ext/antlr4
 	url = https://github.com/antlr/antlr4.git
 [submodule "ext/compile-time-regular-expressions"]
 	path = ext/compile-time-regular-expressions
