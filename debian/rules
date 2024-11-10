@@ -14,6 +14,7 @@
 # Package maintainers to append LDFLAGS.
 #export DEB_LDFLAGS_MAINT_APPEND = -Wl,--as-needed
 
+export DEB_BUILD_OPTIONS = parallel=2
 
 %:
 	dh $@
