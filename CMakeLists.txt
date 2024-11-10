@@ -67,51 +67,51 @@ include(FetchContent)
 ################################
 # GTEST AND GMOCK
 ################################
-FetchContent_Declare(
-        googletest
-        GIT_REPOSITORY https://github.com/google/googletest.git
-        GIT_TAG 33af80a883ddc33d9c0fac0a5b4578301efb18de # main branch on 2024/05/16
-)
+#FetchContent_Declare(
+#        googletest
+#        GIT_REPOSITORY https://github.com/google/googletest.git
+#        GIT_TAG 33af80a883ddc33d9c0fac0a5b4578301efb18de # main branch on 2024/05/16
+#)
 
 ################################
 # NLOHMANN JSON
 ################################
-FetchContent_Declare(
-        nlohmann-json
-        GIT_REPOSITORY https://github.com/nlohmann/json.git
-        GIT_TAG 9cca280a4d0ccf0c08f47a99aa71d1b0e52f8d03 # release-3.11.3
-)
+#FetchContent_Declare(
+#        nlohmann-json
+#        GIT_REPOSITORY https://github.com/nlohmann/json.git
+#        GIT_TAG 9cca280a4d0ccf0c08f47a99aa71d1b0e52f8d03 # release-3.11.3
+#)
 # We only want to include a single file from the nlohmann GitHub repository, so we initialize the submodule
 # manually
-FetchContent_GetProperties(nlohmann-json)
-if (NOT nlohmann-json_POPULATED)
-    FetchContent_Populate(nlohmann-json)
-    include_directories(SYSTEM ${nlohmann-json_SOURCE_DIR}/single_include)
-endif ()
+#FetchContent_GetProperties(nlohmann-json)
+#if (NOT nlohmann-json_POPULATED)
+#    FetchContent_Populate(nlohmann-json)
+    include_directories(SYSTEM ext/json/single_include)
+#endif ()
 
 
 ###############################
 # ANTLR CPP RUNTIME FOR THE SPARQL PARSER
 ###############################
-FetchContent_Declare(
-        antlr
-        GIT_REPOSITORY https://github.com/antlr/antlr4.git
-        GIT_TAG 9239e6ff444420516b44b7621e8dc7691fcf0e16
-)
+#FetchContent_Declare(
+#        antlr
+#        GIT_REPOSITORY https://github.com/antlr/antlr4.git
+#        GIT_TAG 9239e6ff444420516b44b7621e8dc7691fcf0e16
+#)
 
 # From ANTLR we actually don't want the toplevel directory (which doesn't
 # have a proper `CMakeLists.txt` anyway), but only the C++ runtime which
 # resides in a subdirectory. We additionally need to suppress some warnings
 # only for ANTLR. We therefore have to perform the initialization for
 # ANTLR using `FetchContent` manually.
-FetchContent_GetProperties(antlr)
-if (NOT antlr_POPULATED)
-    FetchContent_Populate(antlr)
+#FetchContent_GetProperties(antlr)
+#if (NOT antlr_POPULATED)
+#    FetchContent_Populate(antlr)
     set(ANTLR_BUILD_CPP_TESTS OFF CACHE BOOL "don't try to build googletest twice")
-    add_subdirectory(${antlr_SOURCE_DIR}/runtime/Cpp EXCLUDE_FROM_ALL)
+    add_subdirectory(ext/antlr4/runtime/Cpp EXCLUDE_FROM_ALL)
     target_compile_options(antlr4_static PRIVATE -Wno-all -Wno-extra -Wno-unqualified-std-cast-call -Wno-error -Wno-deprecated-declarations)
-    include_directories(SYSTEM ${antlr_SOURCE_DIR}/runtime/Cpp/runtime/src)
-endif ()
+    include_directories(SYSTEM ext/antlr4/runtime/Cpp/runtime/src)
+#endif ()
 
 ################################
 # Threading
@@ -226,11 +226,11 @@ set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG}")
 ################################
 # CTRE, Compile-Time-Regular-Expressions
 ################################
-FetchContent_Declare(
-        ctre
-        GIT_REPOSITORY https://github.com/hanickadot/compile-time-regular-expressions.git
-        GIT_TAG b3d7788b559e34d985c8530c3e0e7260b67505a6 # v3.8.1
-)
+#FetchContent_Declare(
+#        ctre
+#        GIT_REPOSITORY https://github.com/hanickadot/compile-time-regular-expressions.git
+#        GIT_TAG b3d7788b559e34d985c8530c3e0e7260b67505a6 # v3.8.1
+#)
 
 ################################
 # ABSEIL
@@ -238,22 +238,22 @@ FetchContent_Declare(
 set(ABSL_ENABLE_INSTALL ON)
 set(ABSL_USE_SYSTEM_INCLUDES ON)
 set(ABSL_PROPAGATE_CXX_STD ON)
-FetchContent_Declare(
-        abseil
-        GIT_REPOSITORY https://github.com/abseil/abseil-cpp.git
-        GIT_TAG 93ac3a4f9ee7792af399cebd873ee99ce15aed08  # 2024-05-16
-)
+#FetchContent_Declare(
+#        abseil
+#        GIT_REPOSITORY https://github.com/abseil/abseil-cpp.git
+#        GIT_TAG 93ac3a4f9ee7792af399cebd873ee99ce15aed08  # 2024-05-16
+#)
 
 ################################
 # S2 Geometry
 ################################
 SET (BUILD_TESTS OFF CACHE BOOL "no tests for s2")
-FetchContent_Declare(
-        s2
-        GIT_REPOSITORY https://github.com/google/s2geometry.git
-        GI_TAG 5b5eccd54a08ae03b4467e79ffbb076d0b5f221e  #version 0.11.1
-        SYSTEM
-)
+#FetchContent_Declare(
+#        s2
+#        GIT_REPOSITORY https://github.com/google/s2geometry.git
+#        GIT_TAG 5b5eccd54a08ae03b4467e79ffbb076d0b5f221e  #version 0.11.1
+#        SYSTEM
+#)
 
 
 if (USE_PARALLEL)
@@ -302,44 +302,54 @@ set(USE_GNU_PARALLEL OFF CACHE BOOL "Don't use gnu parallel" FORCE)
 set(USE_OPENMP OFF CACHE BOOL "Don't use OPENMP as default" FORCE)
 
 set(STXXL_CXX_FLAGS "${STXXL_CXX_FLAGS} -Wno-deprecated-declarations")
-FetchContent_Declare(
-        stxxl
-        GIT_REPOSITORY https://github.com/ad-freiburg/stxxl.git
-        GIT_TAG 449a8fed095ffd5c10560714b446895e54c65486
-)
+#FetchContent_Declare(
+#        stxxl
+#        GIT_REPOSITORY https://github.com/ad-freiburg/stxxl.git
+#        GIT_TAG 449a8fed095ffd5c10560714b446895e54c65486
+#)
 
 ################################
 # FSST
 ################################
-FetchContent_Declare(
-        fsst
-        #GIT_REPOSITORY https://github.com/cwida/fsst.git
-        #GIT_TAG c8719ef0aa3740da9685ad2738bb9c8ecc327944
-        #FSST Currently has a struct name `Encoder` that leads to ODR violations with the `Encoder`class of S2.
-        # I (joka921) have filed bug reports for both of them and a PR for fsst, but for now we use our own fork
-        # of Fsst.
-        GIT_REPOSITORY https://github.com/joka921/fsst.git
-        GIT_TAG 43fb2d1756f5a5d0e85e765c7b51f5e3be8cc83f
-)
+#FetchContent_Declare(
+#        fsst
+#        #GIT_REPOSITORY https://github.com/cwida/fsst.git
+#        #GIT_TAG c8719ef0aa3740da9685ad2738bb9c8ecc327944
+#        #FSST Currently has a struct name `Encoder` that leads to ODR violations with the `Encoder`class of S2.
+#        # I (joka921) have filed bug reports for both of them and a PR for fsst, but for now we use our own fork
+#        # of Fsst.
+#        GIT_REPOSITORY https://github.com/joka921/fsst.git
+#        GIT_TAG 43fb2d1756f5a5d0e85e765c7b51f5e3be8cc83f
+#)
 
 
 ################################
 # RE2
 ################################
 set(RE2_BUILD_TESTING OFF CACHE BOOL "enable testing for RE2" FORCE)
-FetchContent_Declare(
-        re2
-        GIT_REPOSITORY https://github.com/google/re2.git
-        GIT_TAG bc0faab533e2b27b85b8ad312abf061e33ed6b5d # v.2023-11-01
-        GIT_SHALLOW TRUE
-        OVERRIDE_FIND_PACKAGE
-)
+#FetchContent_Declare(
+#        re2
+#        GIT_REPOSITORY https://github.com/google/re2.git
+#        GIT_TAG bc0faab533e2b27b85b8ad312abf061e33ed6b5d # v.2023-11-01
+#        GIT_SHALLOW TRUE
+#        OVERRIDE_FIND_PACKAGE
+#)
 
 ################################
 # Apply FetchContent
 ################################
-FetchContent_MakeAvailable(googletest ctre abseil re2 stxxl fsst s2)
-# Disable some warnings in RE2, STXXL, and GTEST
+#FetchContent_MakeAvailable(googletest ctre abseil re2 stxxl fsst s2)
+add_subdirectory(ext/abseil-cpp)
+#add_subdirectory(ext/antlr4-src)
+add_subdirectory(ext/compile-time-regular-expressions)
+add_subdirectory(ext/fsst)
+add_subdirectory(ext/googletest)
+add_subdirectory(ext/json)
+add_subdirectory(ext/re2)
+add_subdirectory(ext/s2geometry)
+add_subdirectory(ext/stxxl)
+
+## Disable some warnings in RE2, STXXL, and GTEST
 target_compile_options(s2 PRIVATE -Wno-sign-compare -Wno-unused-parameter -Wno-class-memaccess -Wno-comment -Wno-redundant-move -Wno-unknown-warning-option -Wno-maybe-uninitialized -Wno-class-memaccess)
 target_compile_options(re2 PRIVATE -Wno-unused-parameter)
 target_compile_options(stxxl PRIVATE -Wno-deprecated-declarations)
@@ -410,7 +420,7 @@ endif ()
 ##################################################
 # Precompiled headers
 set(PRECOMPILED_HEADER_FILES_ENGINE src/util/HashMap.h src/engine/Operation.h src/engine/QueryExecutionTree.h)
-set(PRECOMPILED_HEADER_FILES_PARSER src/engine/sparqlExpressions/AggregateExpression.h ${ctre_SOURCE_DIR}/single-header/ctre-unicode.hpp ${antlr_SOURCE_DIR}/runtime/Cpp/runtime/src/antlr4-runtime.h)
+set(PRECOMPILED_HEADER_FILES_PARSER src/engine/sparqlExpressions/AggregateExpression.h ${ctre_SOURCE_DIR}/single-header/ctre-unicode.hpp ext/antlr4/runtime/Cpp/runtime/src/antlr4-runtime.h)
 
 add_subdirectory(src/parser)
 target_precompile_headers(parser PRIVATE ${PRECOMPILED_HEADER_FILES_PARSER})
