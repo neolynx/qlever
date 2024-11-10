@@ -1,0 +1,30 @@
+[submodule "antlr4"]
+	path = ext/antlr4
+	url = https://github.com/antlr/antlr4.git
+[submodule "ext/googletest"]
+	path = ext/googletest
+	url = https://github.com/google/googletest.git
+[submodule "ext/json"]
+	path = ext/json
+	url = https://github.com/nlohmann/json.git
+[submodule "ext/antlr4-src"]
+	path = ext/antlr4-src
+	url = https://github.com/antlr/antlr4.git
+[submodule "ext/compile-time-regular-expressions"]
+	path = ext/compile-time-regular-expressions
+	url = https://github.com/hanickadot/compile-time-regular-expressions.git
+[submodule "ext/abseil-cpp"]
+	path = ext/abseil-cpp
+	url = https://github.com/abseil/abseil-cpp.git
+[submodule "ext/s2geometry"]
+	path = ext/s2geometry
+	url = https://github.com/google/s2geometry.git
+[submodule "ext/stxxl"]
+	path = ext/stxxl
+	url = https://github.com/ad-freiburg/stxxl.git
+[submodule "ext/fsst"]
+	path = ext/fsst
+	url = https://github.com/joka921/fsst.git
+[submodule "ext/re2"]
+	path = ext/re2
+	url = https://github.com/google/re2.git
