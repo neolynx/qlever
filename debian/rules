@@ -25,5 +25,5 @@ override_dh_auto_configure:
 
 
 override_dh_auto_install:
-	ls -l
+	ls -l obj-x86_64-linux-gnu
 	dh_auto_install
