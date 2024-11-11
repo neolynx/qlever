@@ -1,0 +1,6 @@
+#!/usr/bin/dh-exec
+
+IndexBuilderMain => usr/bin/qlever-indexbuilder
+ServerMain => usr/bin/qleverd
+VocabularyMergerMain => usr/bin/qlever-vocabularymerger
+PrintIndexVersionMain => usr/bin/qlever-printindexversion

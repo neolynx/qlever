@@ -4,7 +4,7 @@ Priority: optional
 Maintainer: lynx <lynx@unknown>
 Rules-Requires-Root: no
 Build-Depends:
- debhelper-compat (= 13),
+ debhelper-compat (= 13), dh-exec,
  cmake (>= 3.27),
  libicu-dev,
  tzdata,
