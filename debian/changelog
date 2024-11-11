@@ -1,3 +1,10 @@
+qlever (0.0.14) stable; urgency=medium
+
+  * debug
+  * debian: fix install perms
+
+ -- André Roth <neolynx@gmail.com>  Mon, 11 Nov 2024 23:37:14 +0100
+
 qlever (0.0.13) stable; urgency=medium
 
   * debug
