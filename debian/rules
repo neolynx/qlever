@@ -22,3 +22,8 @@ export DEB_BUILD_OPTIONS = parallel=2
 override_dh_auto_configure:
 	dh_auto_configure -- \
 		 -DCMAKE_BUILD_TYPE=Release -DLOGLEVEL=INFO -DUSE_PARALLEL=true -D_NO_TIMING_TESTS=ON -GNinja
+
+
+override_dh_auto_install:
+	ls -l
+	dh_auto_install
