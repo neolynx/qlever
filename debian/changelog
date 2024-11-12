@@ -1,3 +1,9 @@
+qlever (0.0.15) stable; urgency=medium
+
+  * debian: fix install
+
+ -- André Roth <neolynx@gmail.com>  Tue, 12 Nov 2024 09:22:52 +0100
+
 qlever (0.0.14) stable; urgency=medium
 
   * debug
